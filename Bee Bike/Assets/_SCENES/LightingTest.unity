@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.4224813, g: 0.8867924, b: 0.61271685, a: 1}
   m_AmbientGroundColor: {r: 0.16037738, g: 0.029084971, b: 0.0098344665, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 3
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 9695d71527b4930439258c999d32d145, type: 2}
   m_HaloStrength: 0.5
@@ -33,7 +33,7 @@ RenderSettings:
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
-  m_DefaultReflectionResolution: 128
+  m_DefaultReflectionResolution: 256
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
@@ -378,13 +378,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941823261}
-  m_LocalRotation: {x: -0.17776482, y: -0.8104391, z: 0.0679318, w: -0.55405194}
+  m_LocalRotation: {x: -0.32537833, y: -0.7632437, z: 0.16978188, w: -0.53175396}
   m_LocalPosition: {x: 21.455353, y: 78.458, z: 148.822}
   m_LocalScale: {x: 0.87463, y: 0.87463, z: 0.87463}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 17.884, y: -246.674, z: 12.925}
+  m_LocalEulerAnglesHint: {x: 37.244003, y: -241.747, z: 23.397001}
 --- !u!1 &1290041575
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,13 +560,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1384104075}
-  m_LocalRotation: {x: 0.4480229, y: 0.36661637, z: -0.019382562, w: 0.8151639}
+  m_LocalRotation: {x: 0.453901, y: 0.2766407, z: 0.0141749615, w: 0.8469019}
   m_LocalPosition: {x: 28.2, y: 81.31, z: 146.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 48.128002, y: 60.396004, z: 26.412}
+  m_LocalEulerAnglesHint: {x: 49.550003, y: 47.908, z: 25.093}
 --- !u!1 &1486234827
 GameObject:
   m_ObjectHideFlags: 0
