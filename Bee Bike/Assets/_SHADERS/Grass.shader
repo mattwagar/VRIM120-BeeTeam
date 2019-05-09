@@ -21,7 +21,7 @@ Shader "Roystan/Grass"
 	CGINCLUDE
 	#include "UnityCG.cginc"
 	#include "Autolight.cginc" 
-	#include "Shaders/CustomTessellation.cginc"
+	#include "CustomTessellation.cginc"
 
 	//inside CGINCLUDE block 
 	float _BendRotationRandom;
