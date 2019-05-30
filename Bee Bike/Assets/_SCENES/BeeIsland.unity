@@ -31284,6 +31284,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrassPlane
       objectReference: {fileID: 0}
+    - target: {fileID: 4154683701944843584, guid: 6b25f04510e1f8b408dc627363163864,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5370977715865571994, guid: 6b25f04510e1f8b408dc627363163864,
         type: 3}
       propertyPath: m_IsActive
@@ -31309,6 +31314,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterPlane
       objectReference: {fileID: 0}
+    - target: {fileID: 2419753359634647452, guid: 6b25f04510e1f8b408dc627363163864,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 353a2aeaef391804e907c50d257e86d5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b25f04510e1f8b408dc627363163864, type: 3}
 --- !u!1 &5370977716192116171 stripped
@@ -31355,6 +31365,35 @@ PlayableDirector:
     value: {fileID: 5370977716192116172}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &5370977716192116174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5370977716192116171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60df5536a858672408309b7afd22c372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClearColour: {r: 0, g: 0, b: 0, a: 0}
+  PaintShader: {fileID: 2100000, guid: a77b0f2beab3de6458205a35aaadc835, type: 2}
+  PaintTarget: {fileID: 8400000, guid: 9a28d4d4f6238c242a5878f37ab541ad, type: 2}
+--- !u!64 &5370977716192116175
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5370977716192116171}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -4262721695177926766, guid: 1afa0df73529ed843b09f39484549864, type: 3}
 --- !u!1 &5442923164854953620
 GameObject:
   m_ObjectHideFlags: 0
