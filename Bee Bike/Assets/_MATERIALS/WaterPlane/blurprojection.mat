@@ -45,7 +45,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 411588d0fd1985740a0858bcc9fe0aa0, type: 3}
-        m_Scale: {x: 1.08, y: 1.38}
+        m_Scale: {x: 0.1, y: 0.1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -69,7 +69,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _RippleTex:
         m_Texture: {fileID: 2800000, guid: 4814a24f06ebd1545870032df7d42eec, type: 3}
-        m_Scale: {x: 1.39, y: 1.26}
+        m_Scale: {x: 0.2, y: 0.2}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BlendWidth: 15.83
