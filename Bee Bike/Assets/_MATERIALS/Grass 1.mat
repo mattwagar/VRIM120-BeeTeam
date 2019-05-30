@@ -61,7 +61,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BendRotationRandom: 0
-    - _BladeHeight: 43
+    - _BladeHeight: 20
     - _BladeHeightRandom: 0.7
     - _BladeWidth: 7.3
     - _BladeWidthRandom: 0.55
@@ -85,8 +85,8 @@ Material:
     - _WindStrength: 0.31
     - _ZWrite: 1
     m_Colors:
-    - _BottomColor: {r: 0.25992346, g: 0.5391022, b: 0.5566038, a: 1}
+    - _BottomColor: {r: 0.21462265, g: 0.4812251, b: 0.5, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TopColor: {r: 0.33231828, g: 0.7735849, b: 0.30286577, a: 1}
+    - _TopColor: {r: 0.5793992, g: 0.77254903, b: 0.3019608, a: 1}
     - _WindFrequency: {r: 0.015, g: 0.01, b: 0, a: 0}
