@@ -9,6 +9,7 @@ public class Follow : MonoBehaviour
     private Rigidbody rb;
     private Collider collider;
     private GameObject leader;
+    private Transform parentTransform;
 
     private bool isFollowing = false;
 
@@ -25,6 +26,7 @@ public class Follow : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
+        parentTransform = transform.parent;
     }
 
     /*
@@ -89,7 +91,7 @@ public class Follow : MonoBehaviour
      */
     void FollowPlayerPositionLerp()
     {
-        transform.position = Vector3.Lerp(transform.position, leader.transform.position, Time.deltaTime * followSpeed);
+        parentTransform.position = Vector3.Lerp(parentTransform.position, leader.transform.position, Time.deltaTime * followSpeed);
     }
 
     #endregion
