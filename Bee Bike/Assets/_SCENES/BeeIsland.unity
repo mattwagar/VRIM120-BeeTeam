@@ -13101,8 +13101,8 @@ Transform:
   - {fileID: 687570493}
   - {fileID: 1815925802}
   - {fileID: 8511974212836695691}
-  - {fileID: 512762184}
   - {fileID: 1469281453}
+  - {fileID: 512762184}
   - {fileID: 266655014}
   m_Father: {fileID: 1431017908}
   m_RootOrder: 7
@@ -31895,6 +31895,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 353a2aeaef391804e907c50d257e86d5, type: 2}
+    - target: {fileID: 5370977716582322303, guid: 6b25f04510e1f8b408dc627363163864,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b25f04510e1f8b408dc627363163864, type: 3}
 --- !u!1 &5370977716192116171 stripped
