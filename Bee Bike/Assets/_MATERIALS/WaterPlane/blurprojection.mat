@@ -7,18 +7,22 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PaintTexture
-  m_Shader: {fileID: 4800000, guid: 78bf3602ec48cb64abb7b85012db6820, type: 3}
+  m_Name: blurprojection
+  m_Shader: {fileID: 4800000, guid: 81cfd407411a33148ba75dd73490ac53, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 5
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BlurTex:
+        m_Texture: {fileID: 8400000, guid: 83dc2b64b96db6444b9236280f92b61d, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -40,8 +44,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 411588d0fd1985740a0858bcc9fe0aa0, type: 3}
+        m_Scale: {x: 1.08, y: 1.38}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -55,22 +59,44 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ReflectionTexLeft:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ReflectionTexRight:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RippleTex:
+        m_Texture: {fileID: 2800000, guid: 4814a24f06ebd1545870032df7d42eec, type: 3}
+        m_Scale: {x: 1.39, y: 1.26}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - PaintBrushSize: 0.0485
+    - _BlendWidth: 15.83
     - _BumpScale: 1
+    - _CamDistRange: 622.5
     - _Cutoff: 0.5
+    - _DepthMul: 111.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _FresnelExponent: 0.01
+    - _GlittiesPanningSpeed: 0.0235
+    - _GlossMapScale: 1
     - _Glossiness: 0.5
+    - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _RefractionScale: 0.593
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _TwinklePanningSpeed: 0.02
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - PaintBrushColour: {r: 0, g: 0, b: 0, a: 1}
-    - PaintUv: {r: 0.6204865, g: 0.5497327, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.7783019, g: 1, b: 0.9801073, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FresnelColor: {r: 0.8490566, g: 0.5166429, b: 0.5166429, a: 1}
+    - _HighlightColor: {r: 0.990566, g: 0.990566, b: 0.990566, a: 0.48235294}
