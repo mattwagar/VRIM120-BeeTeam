@@ -1,6 +1,6 @@
 //Maya ASCII 2018 scene
 //Name: bee_idle_v02.ma
-//Last modified: Thu, May 30, 2019 01:18:33 PM
+//Last modified: Thu, May 30, 2019 03:17:18 PM
 //Codeset: 1252
 requires maya "2018";
 requires -nodeType "aiOptions" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter" "mtoa" "3.1.2.1";
