@@ -1,37 +1,53 @@
-Shader "Roystan/Grass"
+Shader "Roystan/Grass1"
 {
     Properties
     {
 		[Header(Shading)]
         _TopColor("Top Color", Color) = (1,1,1,1)
 		_BottomColor("Bottom Color", Color) = (1,1,1,1)
+		_TopColor2("Top Color 2", Color) = (1,1,1,1)
+		_BottomColor2("Bottom Color 2", Color) = (1,1,1,1)
+		_MainTex("Main Texture", 2D) = "white" {}
 		_TranslucentGain("Translucent Gain", Range(0,1)) = 0.5
 		_BendRotationRandom("Bend Rotation Random", Range(0, 1)) = 0.2 
 		_BladeWidth("Blade Width", Float) = 0.05
         _BladeWidthRandom("Blade Width Random", Float) = 0.02
         _BladeHeight("Blade Height", Float) = 0.5
         _BladeHeightRandom("Blade Height Random", Float) = 0.3
+		_TessellationUniform("Tessellation Uniform", Range(1, 64)) = 1 
+		_WindDistortionMap("Wind Distortion Map", 2D) = "white" {}
+        _WindFrequency("Wind Frequency", Vector) = (0.05, 0.05, 0, 0) 
+		_WindStrength("Wind Strength", Float) = 1
+		
+
     }
 
 	CGINCLUDE
 	#include "UnityCG.cginc"
 	#include "Autolight.cginc" 
-	#include "Assets/_SHADERS/CustomTessellation.cginc"
+	#include "CustomTessellation.cginc"
 
 	//inside CGINCLUDE block 
+	sampler2D _MainTex; 
+	float4 _MainTex_ST; 
 	float _BendRotationRandom;
 	float _BladeHeight;
     float _BladeHeightRandom;	
     float _BladeWidth;
     float _BladeWidthRandom;
+	sampler2D _WindDistortionMap; 
+	float4 _WindDistortionMap_ST; 
+	float2 _WindFrequency;
+	float _WindStrength;
 
 	struct geometryOutput 
 	{ 
 		float4 pos : SV_POSITION;
 		float2 uv: TEXCOORD0;
+		float4 maincolor: COLOR;
 	};
 
-	struct vertexInput 
+	/*struct vertexInput 
 	{
 		float4 vertex : POSITION; 
 		float3 normal : NORMAL; 
@@ -43,14 +59,16 @@ Shader "Roystan/Grass"
 		float4 vertex : SV_POSITION; 
 		float3 normal : NORMAL;
 		float4 tangent : TANGENT;
-	}; 
+	}; */
 
 
-	geometryOutput VertexOutput(float3 pos, float2 uv)
+	geometryOutput VertexOutput(float3 pos, float2 uv, float4 maincolor)
 	{
 		geometryOutput o;
 		o.pos = UnityObjectToClipPos(pos);
 		o.uv = uv;
+		o.maincolor = maincolor;
+
 		return o;
 	} 
 
@@ -85,6 +103,15 @@ Shader "Roystan/Grass"
 		float3 vNormal = IN[0].normal;
         float4 vTangent = IN[0].tangent;
         float3 vBinormal = cross(vNormal, vTangent) * vTangent.w;
+		float2 uv = pos.xz * _WindDistortionMap_ST.xy + _WindDistortionMap_ST.zw + _WindFrequency * _Time.y;
+		float2 windSample = (tex2Dlod(_WindDistortionMap, float4(uv, 0, 0)).xy * 2 - 1) * _WindStrength; 
+		float3 wind = normalize(float3(windSample.x, windSample.y, 0)); 
+		float3x3 windRotation = AngleAxis3x3(UNITY_PI * windSample, wind);
+
+		float2 uv2 = pos.xz * _MainTex_ST.xy * -1 + _MainTex_ST.zw;
+		//float2 uv2 = TRANSFORM_TEX (IN[0].uv, _MainTex);
+
+		float4 maincolor = tex2Dlod(_MainTex, float4(uv2, 0, 0));
 
 		float3x3 tangentToLocal = float3x3( 
            vTangent.x, vBinormal.x, vNormal.x,
@@ -94,15 +121,17 @@ Shader "Roystan/Grass"
 		
 
 	    float3x3 facingRotationMatrix = AngleAxis3x3(rand(pos) * UNITY_TWO_PI, float3(0, 0, 1)); 
-		float3x3 bendRotationMatrix = AngleAxis3x3(rand(pos.yyx) * _BendRotationRandom * UNITY_PI * 0.5, float3(-1, 0, 0));
-	    float3x3 transformationMatrix = mul(mul(tangentToLocal, facingRotationMatrix), bendRotationMatrix);
+		float3x3 bendRotationMatrix = AngleAxis3x3(rand(pos.yyx) * _BendRotationRandom * UNITY_PI * 0.5 + step(float4(1.0, 1.0, 1.0, 1.0), maincolor) * rand(pos.yyx) * 5, float3(-1, 0, 0));
+	    float3x3 transformationMatrix = mul(mul(mul(tangentToLocal, windRotation), facingRotationMatrix), bendRotationMatrix);
 
 		
-		float height = (rand(pos.zyx) * 2 - 1) * _BladeHeightRandom + _BladeHeight;
+		float height = (rand(pos.zyx) * 2 - 1) * _BladeHeightRandom + _BladeHeight + step(maincolor, float4(0.5, 0.5, 0.5, 1.0)) * 10;
         float width = (rand(pos.xzy) * 2 - 1) * _BladeWidthRandom + _BladeWidth;
-		triStream.Append(VertexOutput(pos + mul(transformationMatrix, float3(width, 0, 0)), float2(0, 0)));
-        triStream.Append(VertexOutput(pos + mul(transformationMatrix, float3(-width, 0, 0)),float2(1,0)));
-        triStream.Append(VertexOutput(pos + mul(transformationMatrix, float3(0, 0, height)),float2(.5, 1)));
+
+
+		triStream.Append(VertexOutput(pos + mul(transformationMatrix, float3(width, 0, 0)), float2(0, 0), maincolor));
+        triStream.Append(VertexOutput(pos + mul(transformationMatrix, float3(-width, 0, 0)), float2(1,0), maincolor));
+        triStream.Append(VertexOutput(pos + mul(transformationMatrix, float3(0, 0, height)), float2(.5, 1), maincolor));
 	}
 	
  
@@ -139,7 +168,7 @@ Shader "Roystan/Grass"
 
 	
 
-	vertexOutput vert(vertexInput v)
+/*	vertexOutput vert(vertexInput v)
    {
 	vertexOutput o;
 	o.vertex = v.vertex;
@@ -147,7 +176,7 @@ Shader "Roystan/Grass"
 	o.tangent = v.tangent;
 	return o;
    }
-
+*/
 
 	/*float4 vert(float4 vertex : POSITION) : SV_POSITION
 	{
@@ -172,16 +201,26 @@ Shader "Roystan/Grass"
             #pragma fragment frag
 			#pragma geometry geo
 			#pragma target 4.6
+			#pragma hull hull 
+			#pragma domain domain 
             
 			#include "Lighting.cginc"
 
 			float4 _TopColor;
 			float4 _BottomColor;
+			float4 _TopColor2;
+			float4 _BottomColor2;
 			float _TranslucentGain;
 
 			float4 frag (geometryOutput i, fixed facing : VFACE) : SV_Target
             {	
-				return lerp(_BottomColor, _TopColor, i.uv.y);
+				float4 c1 = step(float4(0.5, 0.5, 0.5, 1), i.maincolor)*lerp(_BottomColor, _TopColor, i.uv.y);
+				float4 c2 = step(i.maincolor, float4(0.5, 0.5, 0.5, 1.0))*lerp(_BottomColor2, _TopColor2, i.uv.y);
+
+				//if color <= grey
+				return c1 + c2;
+
+				//return lerp(_BottomColor, _TopColor, i.uv.y);
             }
             ENDCG
         }
