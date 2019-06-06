@@ -19,9 +19,13 @@ public class PesticideActivation : MonoBehaviour
      */
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Player")
+        Debug.Log(collision.transform.name);
+        if (collision.gameObject.name == "Bike")
         {
-            objectToActivate.SetActive(true);
+            Transform beeController = collision.transform.Find("BeeController");
+            Animator BeeAnimator = beeController.GetComponent<Animator>();
+            BeeAnimator.SetTrigger("DamageTrigger");
+            // objectToActivate.SetActive(true);
             Debug.Log("Player entered pesticide cloud.");
         }
     }
@@ -34,7 +38,7 @@ public class PesticideActivation : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            objectToActivate.SetActive(false);
+            // objectToActivate.SetActive(false);
             Debug.Log("Player exited pesticide cloud.");
         }
     }

@@ -37,10 +37,11 @@ public class Follow : MonoBehaviour
      */
     void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.name == "Bike" && isFollowing == false)
         {
+            Debug.Log("Bee Collided!!");
             isFollowing = true;
-            collider.enabled = false;
+            // collider.enabled = false;
             leader = Leader.GetFormationPosition();
         }
     }
