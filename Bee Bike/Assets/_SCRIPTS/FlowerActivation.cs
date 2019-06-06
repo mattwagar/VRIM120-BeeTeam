@@ -29,6 +29,10 @@ public class FlowerActivation : MonoBehaviour
         }
     }
 
+
+    /*
+     * General actions the flower will perform: activate a particle effect and play a sound clip
+     */
     private void FlowerAction()
     {
         particleEffect.SetActive(true);
