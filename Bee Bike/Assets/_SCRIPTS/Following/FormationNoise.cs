@@ -6,22 +6,27 @@ public class FormationNoise : MonoBehaviour
 {
     #region Variables
 
+    [Header("Buzziness Noise")]
     public float randomRangeMin = 0.0f;
     public float randomRangeMax = 1.0f;
 
-    public enum Motion
-    {
-        AllRandom,
-        XRandom,
-        SwayRandom
-    }
-    public Motion motion;
+    //public enum Motion
+    //{
+    //    AllRandom,
+    //    XRandom,
+    //    SwayRandom
+    //}
+    //public Motion motion;
 
-    public float sway = 0.0f;
-    public float swaySpeed = 1.0f;
+    [Header("Sway Parameters")]
+    public float swayX = 0.0f;
+    public float swaySpeedX = 1.0f;
+    public float swayY = 0.0f;
+    public float swaySpeedY = 1.0f;
 
     private Vector3 initialLocation;
-    private bool turn = true;
+    private bool turnX = true;
+    private bool turnY = true;
     #endregion
 
 
@@ -29,26 +34,28 @@ public class FormationNoise : MonoBehaviour
 
     private void Start()
     {
-        //initialLocation = transform.position;
         initialLocation = transform.localPosition;
+
+        RandomizeStartingPosition();
     }
 
     private void FixedUpdate()
     {
-        switch (motion)
-        {
-            case Motion.AllRandom:
-                NoiseMovement();
-                break;
-            case Motion.XRandom:
-                NoiseMovementxFocused();
-                break;
-            case Motion.SwayRandom:
-                NoiseMovementGuided();
-                break;
-            default:
-                break;
-        }
+        //switch (motion)
+        //{
+        //    case Motion.AllRandom:
+        //        NoiseMovement();
+        //        break;
+        //    case Motion.XRandom:
+        //        NoiseMovementxFocused();
+        //        break;
+        //    case Motion.SwayRandom:
+        //        NoiseMovementGuided();
+        //        break;
+        //    default:
+        //        break;
+        //}
+        NoiseMovementGuided();
     }
 
     /*
@@ -85,42 +92,76 @@ public class FormationNoise : MonoBehaviour
      */
     private void NoiseMovementGuided()
     {
-        //float xGuide = sway * Mathf.Cos(Time.deltaTime * swaySpeed);
-
-        //Vector3 randomPosition = initialLocation +
-        //    new Vector3(Random.Range(randomRangeMin, randomRangeMax) + xGuide,
-        //    Random.Range(randomRangeMin, randomRangeMax),
-        //    Random.Range(randomRangeMin, randomRangeMax));
-
         // Reverse swaying direction of object once it hits a maximum
-        if ((transform.localPosition.x > initialLocation.x + sway) || (transform.localPosition.x < initialLocation.x - sway))
+        if ((transform.localPosition.x > initialLocation.x + swayX) || (transform.localPosition.x < initialLocation.x - swayX))
         {
-            turn = !turn;
+            turnX = !turnX;
         }
 
-        float xGuide = SwayMotion();
+        // Reverse swaying direction of object once it hits a maximum
+        if ((transform.localPosition.y > initialLocation.y + swayY) || (transform.localPosition.y < initialLocation.y - swayY))
+        {
+            turnY = !turnY;
+        }
+
+        float xGuide = SwayMotionX();
+        float yGuide = SwayMotionY();
 
         Vector3 randomPosition = new Vector3(xGuide + transform.localPosition.x,
-            Random.Range(randomRangeMin, randomRangeMax) + initialLocation.y,
+            yGuide + transform.localPosition.y,
             Random.Range(randomRangeMin, randomRangeMax) + initialLocation.z);
 
         transform.localPosition = randomPosition;
     }
 
-    private float SwayMotion()
+    private float SwayMotionX()
     {
         float swayLocation;
 
-        if (turn)
+        if (turnX)
         {
-            swayLocation = Time.deltaTime * swaySpeed;
+            swayLocation = Time.deltaTime * swaySpeedX;
         }
         else
         {
-            swayLocation = -Time.deltaTime * swaySpeed;
+            swayLocation = -Time.deltaTime * swaySpeedX;
         }
 
         return swayLocation;
+    }
+
+
+    private float SwayMotionY()
+    {
+        float swayLocation;
+
+        if (turnY)
+        {
+            swayLocation = Time.deltaTime * swaySpeedY;
+        }
+        else
+        {
+            swayLocation = -Time.deltaTime * swaySpeedY;
+        }
+
+        return swayLocation;
+    }
+
+
+    /*
+     * Initialize each position in a bit of a randomized position within the sway constraints
+     * so they do not all move together as uniformly
+     */
+    private void RandomizeStartingPosition()
+    {
+        float maxRangeX = transform.localPosition.x + swayX;
+        float maxRangeY = transform.localPosition.y + swayY;
+
+        transform.localPosition = new Vector3(Random.Range(transform.localPosition.x, maxRangeX),
+            Random.Range(transform.localPosition.y, maxRangeY),
+            transform.localPosition.z);
+
+        Debug.Log(gameObject.name + " had its initial location randomized to: " + transform.localPosition);
     }
 
     #endregion
