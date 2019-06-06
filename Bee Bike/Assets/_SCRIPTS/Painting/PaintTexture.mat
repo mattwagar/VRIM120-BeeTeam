@@ -71,6 +71,6 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - PaintBrushColour: {r: 0, g: 0, b: 0, a: 1}
-    - PaintUv: {r: 0.49196658, g: 0.34678853, b: 0, a: 0}
+    - PaintUv: {r: 0.34200096, g: 0.37171912, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
