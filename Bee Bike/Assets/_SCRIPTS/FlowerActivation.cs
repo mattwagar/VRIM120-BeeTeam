@@ -5,10 +5,16 @@ using UnityEngine;
 public class FlowerActivation : MonoBehaviour
 {
     Collider collider;
+    public GameObject particleEffect;
+
+    public AudioClip flowerSound;
+    AudioSource soundSource;
 
     private void Start()
     {
         collider = GetComponent<Collider>();
+
+        soundSource.clip = flowerSound;
     }
 
     /*
@@ -25,6 +31,10 @@ public class FlowerActivation : MonoBehaviour
 
     private void FlowerAction()
     {
+        particleEffect.SetActive(true);
+
+        soundSource.PlayOneShot(flowerSound);
+
         Debug.Log("Flower activated.");
     }
 }
