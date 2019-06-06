@@ -1303,6 +1303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followSpeed: 4
   stoppingDistance: 2
+  rotationalSlerpDamping: 5
 --- !u!65 &887738170258238034
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2353,9 +2354,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   randomRangeMin: 0
   randomRangeMax: 0
-  motion: 2
-  sway: 0
-  swaySpeed: 0
+  swayX: 0
+  swaySpeedX: 1
+  swayY: 0
+  swaySpeedY: 1
 --- !u!1 &6091215530607172694
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,8 @@ public class Follow : MonoBehaviour
     public float followSpeed = 4f;
     public float stoppingDistance = 2.0f;
 
+    public float rotationalSlerpDamping = 1.0f;
+
     #endregion
 
 
@@ -91,6 +93,11 @@ public class Follow : MonoBehaviour
      */
     void FollowPlayerPositionLerp()
     {
+        Vector3 lookPos = leader.transform.position - parentTransform.position;
+        lookPos.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(lookPos);
+        parentTransform.rotation = Quaternion.Slerp(parentTransform.rotation, rotation, Time.deltaTime * rotationalSlerpDamping);
+
         parentTransform.position = Vector3.Lerp(parentTransform.position, leader.transform.position, Time.deltaTime * followSpeed);
     }
 
