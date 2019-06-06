@@ -16,6 +16,8 @@ public class Timer : MonoBehaviour
     public Renderer rend;
     public float fadeTime = 2.0f;
 
+    public GameObject endGameTextAnimation;
+
     #endregion
 
     #region Unity Methods
@@ -59,7 +61,8 @@ public class Timer : MonoBehaviour
 
         StartCoroutine(FadeOutTest());
 
-        // Actions to perform to end game
+        StartCoroutine(WaitToActivateAnimation(endGameTextAnimation));
+
         Debug.Log("End Game");
     }
 
@@ -78,6 +81,17 @@ public class Timer : MonoBehaviour
             rend.material.color = fadeColor;
             yield return new WaitForSeconds(fadeTime/20f);
         }
+    }
+
+
+    /*
+     * Activate a gameObject after a designated amount of time
+     */
+     private IEnumerator WaitToActivateAnimation(GameObject objectToActivate)
+    {
+        yield return new WaitForSeconds(fadeTime);
+
+        objectToActivate.SetActive(true);
     }
 
     #endregion
