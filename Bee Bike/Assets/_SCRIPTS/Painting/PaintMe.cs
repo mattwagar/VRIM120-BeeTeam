@@ -46,18 +46,18 @@ public class PaintMe : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		RaycastHit hitInfo = new RaycastHit();
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		// RaycastHit hitInfo = new RaycastHit();
+		// Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-		// OnMouseDown
-		if (Input.GetMouseButton(0))
-		{
-			if (Physics.Raycast(ray, out hitInfo))
-			{
-				// hitInfo.collider.SendMessage("HandleClick", hitInfo, SendMessageOptions.DontRequireReceiver);
-				PaintAt(hitInfo.textureCoord);
-			}
-		}
+		// // OnMouseDown
+		// if (Input.GetMouseButton(0))
+		// {
+		// 	if (Physics.Raycast(ray, out hitInfo))
+		// 	{
+		// 		// hitInfo.collider.SendMessage("HandleClick", hitInfo, SendMessageOptions.DontRequireReceiver);
+		// 		PaintAt(hitInfo.textureCoord);
+		// 	}
+		// }
 
 	}
 
